@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>440307373124-tpplan7jjp0ng736jg98pmbn7i2tmiag.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.440307373124-tpplan7jjp0ng736jg98pmbn7i2tmiag</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAXdKokNStMlEk4wDzHiEXZTEObNLLVMcM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>440307373124</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.techtitans.agendanurse</string>
+	<key>PROJECT_ID</key>
+	<string>agenda-nurse</string>
+	<key>STORAGE_BUCKET</key>
+	<string>agenda-nurse.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:440307373124:ios:84aefd3f5b04339ee39811</string>
+	<key>DATABASE_URL</key>
+	<string>https://agenda-nurse-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
