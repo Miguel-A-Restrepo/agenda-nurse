@@ -53,7 +53,7 @@ class Nurse {
 
   String get name {
     String nurseName = '$fullName $fullLastName';
-    if (nurseName.isEmpty) {
+    if (nurseName.trim().isEmpty) {
       return "No nurse name";
     }
 
