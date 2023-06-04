@@ -63,7 +63,6 @@ class _NursesDropdownState extends State<NursesDropdown> {
               nurseHours += shift.duration.inHours;
             }
           }
-
           if (nurseHours < 44) {
             nursesWithLessThan44Hours.add(nurse);
           }

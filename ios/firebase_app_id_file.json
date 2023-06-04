@@ -1,7 +1,7 @@
 {
   "file_generated_by": "FlutterFire CLI",
   "purpose": "FirebaseAppID & ProjectID for this Firebase app in this directory",
-  "GOOGLE_APP_ID": "1:440307373124:ios:84aefd3f5b04339ee39811",
-  "FIREBASE_PROJECT_ID": "agenda-nurse",
-  "GCM_SENDER_ID": "440307373124"
+  "GOOGLE_APP_ID": "1:465364131593:ios:b35ea994f1abdbe0f07dd8",
+  "FIREBASE_PROJECT_ID": "agenda-nurse-4a18a",
+  "GCM_SENDER_ID": "465364131593"
 }

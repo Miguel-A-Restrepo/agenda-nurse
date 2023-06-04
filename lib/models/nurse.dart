@@ -37,11 +37,11 @@ class Nurse {
 
     Map<String, dynamic> map = snapshot.data() as Map<String, dynamic>;
 
-    Timestamp birthDate = map['birth_date'];
+    Timestamp? birthDate = map['birth_date'];
 
     return Nurse(
       id: snapshot.id,
-      birthDate: birthDate.toDate(),
+      birthDate: birthDate?.toDate(),
       nationalID: map['national_id'],
       fullLastName: map['full_last_name'],
       fullName: map['full_name'],
@@ -53,7 +53,7 @@ class Nurse {
 
   String get name {
     String nurseName = '$fullName $fullLastName';
-    if (nurseName.isEmpty) {
+    if (nurseName.trim().isEmpty) {
       return "No nurse name";
     }
 

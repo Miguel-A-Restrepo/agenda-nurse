@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "465364131593",
+    "project_id": "agenda-nurse-4a18a",
+    "storage_bucket": "agenda-nurse-4a18a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:465364131593:android:25a46e7d2aedaab9f07dd8",
+        "android_client_info": {
+          "package_name": "com.techtitans.agendanurse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "465364131593-9hl2vvbpvt8cehkt90qac0e2ud6f01t6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGrOa7Ug7nAH_4K8aTa24dzGzQl5liKoM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "465364131593-9hl2vvbpvt8cehkt90qac0e2ud6f01t6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "465364131593-2o9rmou43jacqtke8mmk2ulvvj0lkrr1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.techtitans.agendanurse"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
