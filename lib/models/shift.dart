@@ -112,7 +112,8 @@ class Shift {
         finishDate.isBefore(other.finishDate) &&
             finishDate.isAfter(other.startDate) ||
         startDate == other.startDate ||
-        finishDate == other.finishDate;
+        finishDate == other.startDate ||
+        startDate == other.finishDate;
   }
 
   bool couldBeJoinedBackwards(Shift other) {
