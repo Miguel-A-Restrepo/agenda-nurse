@@ -49,11 +49,20 @@ class ShiftDataSource extends CalendarDataSource<Shift> {
 
   Shift _getShiftData(int index) {
     final dynamic shift = appointments![index];
-    late final Shift shiftData;
+    return _convertToShift(shift);
+  }
+
+  Shift _convertToShift(dynamic shift) {
     if (shift is Shift) {
-      shiftData = shift;
+      return shift;
     }
 
-    return shiftData;
+    return Shift(
+      id: '',
+      startDate: DateTime.now(),
+      finishDate: DateTime.now(),
+      nurseID: '',
+      type: ShiftType.NURSE,
+    );
   }
 }
