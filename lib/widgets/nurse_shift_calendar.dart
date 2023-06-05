@@ -17,6 +17,13 @@ class NurseShiftCalendar extends StatefulWidget {
 }
 
 class _NurseShiftCalendarState extends State<NurseShiftCalendar> {
+  ///1.Filtra los turnos de una enfermera considerando los grupos de turnos
+  ///superpuestos, es decir, aquellos cuyos intervalos de tiempo se solapan.
+  ///2.Sobre estos turnos filtra aquellos con al menos 6 personas asignadas.
+  ///Esto permite mostrar en el calendario los turnos que
+  ///ya se encuentran cubiertos u ocupados y de esta manera evitar
+  ///que puedan ser tomados por otra enfermera.
+
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (BuildContext context) {
@@ -26,7 +33,6 @@ class _NurseShiftCalendarState extends State<NurseShiftCalendar> {
         return shift.nurseID == widget.nurse.id;
       }).toList();
 
-      // Agrupa los shifts que se superponen
       List<List<Shift>> overlappingShiftGroups = [];
       for (var shift in widget.shifts) {
         bool shiftAdded = false;
@@ -52,8 +58,6 @@ class _NurseShiftCalendarState extends State<NurseShiftCalendar> {
           overlappingShiftGroups.add([shift]);
         }
       }
-
-      // Filtra los grupos de shifts que tienen menos de 6 personas asignadas
       List<Shift> busyShifts = [];
 
       for (var shiftGroup in overlappingShiftGroups) {

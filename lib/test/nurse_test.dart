@@ -34,7 +34,5 @@ void main() {
       // Assert
       expect(name, equals('No nurse name'));
     });
-
-   
   });
 }

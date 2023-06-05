@@ -129,6 +129,11 @@ class Shift {
         startDate.difference(other.finishDate).inHours <= 8;
   }
 
+  ///Verifica si se puede unir un turno con el turno siguiente para que así sean considerados como un único turno,
+  ///garantizando que sean de la misma enfermera, estén seguidos y el nuevo turno no sobrepase las 8 horas laborales.
+  ///por ejemplo en lugar de tener un turno de 2 a 3 y otro de 3 a 4
+  ///se busca tener un único turno de 2 a 4 que abarque el período completo.
+
   bool couldBeJoinedForwards(Shift other) {
     return finishDate == other.startDate &&
         nurseID == other.nurseID &&

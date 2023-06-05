@@ -1,5 +1,6 @@
 import 'package:agendanurse/models/nurse.dart';
 import 'package:agendanurse/models/shift.dart';
+import 'package:agendanurse/services/nurse_data_source.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -9,10 +10,11 @@ class NursesDropdown extends StatefulWidget {
   final String? preSelectedNurseID;
 
   const NursesDropdown(
-      {super.key,
+      {Key? key,
       required this.weekShifts,
       this.preSelectedNurseID,
-      this.onChanged});
+      this.onChanged})
+      : super(key: key);
 
   @override
   _NursesDropdownState createState() => _NursesDropdownState();
@@ -20,15 +22,13 @@ class NursesDropdown extends StatefulWidget {
 
 class _NursesDropdownState extends State<NursesDropdown> {
   String? _selectedNurseID;
-
-  final Stream<QuerySnapshot<Map<String, dynamic>>> _allNursesStream =
-      FirebaseFirestore.instance.collection('nurses').snapshots();
+  final NurseDataSource _nurseDataSource = NurseDataSource();
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: _allNursesStream,
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+    return FutureBuilder<List<Nurse>>(
+      future: _nurseDataSource.getAllNurses(),
+      builder: (BuildContext context, AsyncSnapshot<List<Nurse>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
         }
@@ -37,36 +37,10 @@ class _NursesDropdownState extends State<NursesDropdown> {
           return Text('Error: ${snapshot.error}');
         }
 
-        QuerySnapshot allNursesQuerySnapshot = snapshot.data!;
+        List<Nurse> allNurses = snapshot.data!;
 
-        if (allNursesQuerySnapshot.docs.isEmpty) {
-          return const Text('No nurses found');
-        }
-
-        List<Nurse> allNurses = [];
-
-        for (var nurseDoc in allNursesQuerySnapshot.docs) {
-          try {
-            allNurses.add(Nurse.fromFirestoreSnapshot(nurseDoc));
-          } catch (e) {
-            print(
-                "Error loading nurse: ${nurseDoc.id} - ${nurseDoc.data()} - $e");
-          }
-        }
-
-        List<Nurse> nursesWithLessThan44Hours = [];
-
-        for (var nurse in allNurses) {
-          int nurseHours = 0;
-          for (var shift in widget.weekShifts) {
-            if (shift.nurseID == nurse.id) {
-              nurseHours += shift.duration.inHours;
-            }
-          }
-          if (nurseHours < 44) {
-            nursesWithLessThan44Hours.add(nurse);
-          }
-        }
+        List<Nurse> nursesWithLessThan44Hours = _nurseDataSource
+            .getNursesWithLessThan44Hours(allNurses, widget.weekShifts);
 
         if (nursesWithLessThan44Hours.isEmpty) {
           return const Text('No nurses available');
@@ -77,16 +51,6 @@ class _NursesDropdownState extends State<NursesDropdown> {
         return _buildNurseDropdownButton(nursesWithLessThan44Hours);
       },
     );
-  }
-
-  List<DropdownMenuItem<String>> _buildNurseDropdownItems(List<Nurse> nurses) {
-    return nurses.map<DropdownMenuItem<String>>((Nurse nurse) {
-      return DropdownMenuItem<String>(
-        value: nurse.id,
-        key: Key(nurse.id),
-        child: Text(nurse.name),
-      );
-    }).toList();
   }
 
   DropdownButton _buildNurseDropdownButton(List<Nurse> nurses) {
@@ -102,5 +66,15 @@ class _NursesDropdownState extends State<NursesDropdown> {
             widget.onChanged!(nurses.firstWhere((nurse) => nurse.id == value));
           }
         });
+  }
+
+  List<DropdownMenuItem<String>> _buildNurseDropdownItems(List<Nurse> nurses) {
+    return nurses.map<DropdownMenuItem<String>>((Nurse nurse) {
+      return DropdownMenuItem<String>(
+        value: nurse.id,
+        key: Key(nurse.id),
+        child: Text(nurse.name),
+      );
+    }).toList();
   }
 }
